@@ -1,15 +1,28 @@
 def is_valid_passphrase(passphrase):
     words = passphrase.split(' ')
 
-    for word in words:
-        if words.count(word) > 1:
+    for word1 in words:
+        if words.count(word1) > 1:
             return False
+
+        chars1 = list(word1)
+
+        for word2 in words:
+            if word1 == word2:
+                continue
+
+            chars2 = list(word2)
+            chars1.sort()
+            chars2.sort()
+
+            if chars1 == chars2:
+                return False
 
     return True
 
 
-def count_valid_passphrases():
-    with open("day4.txt") as file:
+def count_valid_passphrases(file_name):
+    with open(file_name) as file:
         passphrases = file.readlines()
         counter = 0
 
@@ -19,5 +32,4 @@ def count_valid_passphrases():
 
     return counter
 
-
-print(count_valid_passphrases())
+print(count_valid_passphrases("day4.txt"))
